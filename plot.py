@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
-from trans import auto_translate
+
 
 
 def plot_payment_status_pie_chart(data, language, translations):
@@ -26,8 +26,8 @@ def plot_payment_status_pie_chart(data, language, translations):
     yearly_grouped = yearly_df.groupby(Status_col)[Amount_col].sum().reset_index()
 
     # Translate the actual status values (in case they're not already)
-    monthly_grouped[Status_col] = monthly_grouped[Status_col].apply(lambda x: auto_translate(x, language, translations))
-    yearly_grouped[Status_col] = yearly_grouped[Status_col].apply(lambda x: auto_translate(x, language, translations))
+    monthly_grouped[Status_col] = monthly_grouped[Status_col]
+    yearly_grouped[Status_col] = yearly_grouped[Status_col]
 
     # # Define translated color map with fallback color
     status_colors= {

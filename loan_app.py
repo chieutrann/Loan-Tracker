@@ -58,19 +58,20 @@ def generate_schedule(principal, interest_amount, months, start_date):
     schedule = []
     start_date = pd.to_datetime(start_date)
 
-    for i in range(1, months + 1):
+    for i in range(months):
         payment_date = end_of_month(start_date + relativedelta(months=i))
         schedule.append({
-            "Month": i,
+            "Month": i + 1,
             "Date": payment_date,
             "Amount": f"{round(interest_amount, 2):,}",
             "Description": "Monthly Payment",
             "Status": "Unpaid"
         })
-        if payment_date.month == 12:
+        # Add yearly payment at the end of every 12th month
+        if (i + 1) % 12 == 0:
             yearly_payment = principal / (months / 12)
             schedule.append({
-                "Month": i,
+                "Month": i + 1,
                 "Date": payment_date,
                 "Amount": f"{round(yearly_payment, 2):,}",
                 "Description": "Yearly Payment",
@@ -78,6 +79,7 @@ def generate_schedule(principal, interest_amount, months, start_date):
             })
 
     return pd.DataFrame(schedule)
+
 
 def load_translations():
     if os.path.exists(TRANSLATION_FILE):
