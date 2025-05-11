@@ -58,7 +58,7 @@ def generate_schedule(principal, interest_amount, months, start_date):
     schedule = []
     start_date = pd.to_datetime(start_date)
 
-    for i in range(1, months + 1):
+    for i in range(0, months + 1):
         payment_date = end_of_month(start_date + relativedelta(months=i))
         schedule.append({
             "Month": i,
