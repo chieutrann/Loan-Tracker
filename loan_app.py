@@ -132,11 +132,13 @@ def main():
             st.warning("Click 'Save Settings' to save your inputs.")
 
 
-    EDITED_FILE = os.path.join(DATA_FOLDER, f"edited_schedule_{language}.csv")
+    EDITED_FILE = os.path.join(DATA_FOLDER, f"edited_schedule_{duration_months}m_{language}.csv")
     if os.path.exists(EDITED_FILE):
         schedule_df = pd.read_csv(EDITED_FILE)
+        st.info(f"Loaded saved schedule: {EDITED_FILE}")
     else:
         schedule_df = generate_schedule(loan_amount, interest_rate, duration_months, start_date)
+        st.warning("No saved schedule found for this duration and language. Generated a new one.")
 
     if language == "en":
         translations = {}
@@ -216,5 +218,20 @@ def main():
 
     st.download_button("📥 Download CSV", translated_df.to_csv(index=False), file_name="loan_schedule.csv")
     plot_payment_status_pie_chart(translated_df, language, translations_all)
+        # Delete all .csv files in the data folder
+    if access_key == ACCESS_KEY and st.button("🗑️ Delete All CSVs in Data Folder"):
+        deleted_files = []
+        for filename in os.listdir(DATA_FOLDER):
+            if filename.endswith(".csv"):
+                file_path = os.path.join(DATA_FOLDER, filename)
+                os.remove(file_path)
+                deleted_files.append(filename)
+        if deleted_files:
+            st.success(f"Deleted the following files:\n{', '.join(deleted_files)}")
+        else:
+            st.info("No CSV files found to delete.")
+
+
+            
 if __name__ == "__main__":
     main()
