@@ -4,7 +4,6 @@ import json
 import os
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from dotenv import load_dotenv
 from plot import plot_payment_status_pie_chart
 
 
@@ -14,11 +13,9 @@ DATA_FOLDER = "data"
 JSON_FOLDER = "json"
 INPUT_FILE = os.path.join(JSON_FOLDER, "saved_inputs.json")
 # EDITED_FILE = os.path.join(DATA_FOLDER, "edited_schedule.csv")
-ACCESS_KEY_FILE = os.path.join(JSON_FOLDER, "access_key.json")
 TRANSLATION_FILE = os.path.join(JSON_FOLDER, "translation.json")
 
 # ---------- Default Access Key ----------
-load_dotenv()
 ACCESS_KEY = os.getenv('ACCESS_KEY')
 
 # ---------- Helper Functions ----------
