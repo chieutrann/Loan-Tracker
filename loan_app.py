@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from plot import plot_payment_status_pie_chart
-
+from dotenv import load_dotenv
 
 
 # ---------- Paths ----------
@@ -16,9 +16,10 @@ INPUT_FILE = os.path.join(JSON_FOLDER, "saved_inputs.json")
 TRANSLATION_FILE = os.path.join(JSON_FOLDER, "translation.json")
 ACCESS_KEY_FILE = os.path.join(DATA_FOLDER, "access_key.json")
 # ---------- Default Access Key ----------
-ACCESS_KEY = os.getenv('ACCESS_KEY')
 
+load_dotenv()  # loads .env locally, ignored on Render if no .env file
 
+ACCESS_KEY = os.getenv("ACCESS_KEY")
 # ---------- Helper Functions ----------
 def load_saved_inputs():
     if os.path.exists(INPUT_FILE):
