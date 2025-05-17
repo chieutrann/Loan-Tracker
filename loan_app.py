@@ -14,9 +14,10 @@ JSON_FOLDER = "json"
 INPUT_FILE = os.path.join(JSON_FOLDER, "saved_inputs.json")
 # EDITED_FILE = os.path.join(DATA_FOLDER, "edited_schedule.csv")
 TRANSLATION_FILE = os.path.join(JSON_FOLDER, "translation.json")
-
+ACCESS_KEY_FILE = os.path.join(DATA_FOLDER, "access_key.json")
 # ---------- Default Access Key ----------
 ACCESS_KEY = os.getenv('ACCESS_KEY')
+
 
 # ---------- Helper Functions ----------
 def load_saved_inputs():
