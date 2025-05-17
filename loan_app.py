@@ -106,7 +106,8 @@ def main():
     saved_inputs = load_saved_inputs()
     translations_all = load_translations()
     key_lst = list(translations_all.keys())
-
+    st.sidebar.write("🔐 ACCESS_KEY (from env):", repr(ACCESS_KEY))
+    st.sidebar.write("🔐 access_key (from input):", repr(access_key))
     with st.sidebar:
         st.header("Loan Settings (Restricted Editing)")
 
